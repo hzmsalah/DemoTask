@@ -163,7 +163,3 @@ The interface targets modern evergreen browsers supported by Tailwind CSS v4. It
 **العربية (مصري)**
 
 > ده مشروع تجريبي معمول بـ React و ASP.NET بداتا وهمية ومبني على فكرة وموديل شغل 'شغف'. دي مش صفحة رسمية لإدارة العملاء (لأن ده أكيد هيحتاج نظام تسجيل دخول وتأمين وربط بـ APIs تانية) لكن ده مجرد تطبيق عملي بيوضّح طريقتي في تنظيم الـ Frontend وتقسيم وكتابة الـ Backend.
-
-## Repository link
-
-The application footer currently shows a non-clickable “Link coming soon” GitHub placeholder. Replace it with the actual repository URL after the repository is created. There is no hosted demo link until a deployment is intentionally set up.
