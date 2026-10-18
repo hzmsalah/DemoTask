@@ -44,7 +44,6 @@ export const ar: Record<TranslationKey, string> = {
   backToTop: 'الرجوع لأعلى',
   footerTitle: 'عن المشروع',
   githubRepository: 'مستودع GitHub',
-  githubPlaceholder: 'الرابط قريبًا',
   footerDisclaimer: "ده مشروع تجريبي معمول بـ React و ASP.NET بداتا وهمية ومبني على فكرة وموديل شغل 'شغف'. دي مش صفحة رسمية لإدارة العملاء (لأن ده أكيد هيحتاج نظام تسجيل دخول وتأمين وربط بـ APIs تانية) لكن ده مجرد تطبيق عملي بيوضّح طريقتي في تنظيم الـ Frontend وتقسيم وكتابة الـ Backend.",
   totalCustomers: 'إجمالي العملاء',
   language: 'English',

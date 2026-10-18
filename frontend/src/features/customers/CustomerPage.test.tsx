@@ -61,7 +61,7 @@ describe('CustomerPage', () => {
     expect(screen.getAllByText('Last visit').length).toBeGreaterThan(0);
   });
 
-  it('shows a GitHub placeholder and localized disclaimers', async () => {
+  it('shows the GitHub repository link and localized disclaimers', async () => {
     const englishDisclaimer = [
       'This is a proof-of-concept React & ASP.NET project built around Shaghaf’s business model using mock data.',
       'It is not a production-grade customer management system (which would require end-to-end authentication and external API integrations)',
@@ -78,16 +78,17 @@ describe('CustomerPage', () => {
     const footer = await screen.findByRole('contentinfo', { name: 'About this project' });
     expect(footer).toHaveClass('border-t-4', 'border-brand-accent', 'bg-surface');
     expect(within(footer).getByText('GitHub repository:')).toBeInTheDocument();
-    expect(within(footer).getByText('Link coming soon')).toBeInTheDocument();
+    const repositoryLink = within(footer).getByRole('link', { name: 'hzmsalah/DemoTask' });
+    expect(repositoryLink).toHaveAttribute('href', 'https://github.com/hzmsalah/DemoTask');
+    expect(repositoryLink).toHaveClass('underline', 'hover:text-primary-hover');
     expect(within(footer).queryByText('Live demo:')).not.toBeInTheDocument();
     expect(within(footer).queryByText('Hosted link coming soon')).not.toBeInTheDocument();
     expect(within(footer).getByText(englishDisclaimer)).toBeInTheDocument();
-    expect(within(footer).queryByRole('link')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Switch language' }));
     const arabicFooter = screen.getByRole('contentinfo', { name: 'عن المشروع' });
     expect(within(arabicFooter).getByText('مستودع GitHub:')).toBeInTheDocument();
-    expect(within(arabicFooter).getByText('الرابط قريبًا')).toBeInTheDocument();
+    expect(within(arabicFooter).getByRole('link', { name: 'hzmsalah/DemoTask' })).toHaveAttribute('href', 'https://github.com/hzmsalah/DemoTask');
     expect(within(arabicFooter).queryByText('عرض تجريبي:')).not.toBeInTheDocument();
     expect(within(arabicFooter).queryByText('رابط الاستضافة قريبًا')).not.toBeInTheDocument();
     expect(within(arabicFooter).getByText(arabicDisclaimer)).toBeInTheDocument();

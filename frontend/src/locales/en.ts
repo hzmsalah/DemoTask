@@ -42,7 +42,6 @@ export const en = {
   backToTop: 'Back to top',
   footerTitle: 'About this project',
   githubRepository: 'GitHub repository',
-  githubPlaceholder: 'Link coming soon',
   footerDisclaimer: 'This is a proof-of-concept React & ASP.NET project built around Shaghaf’s business model using mock data. It is not a production-grade customer management system (which would require end-to-end authentication and external API integrations) but rather a demonstration of how I would architect the backend and structure the frontend interface.',
   totalCustomers: 'Total customers',
   language: 'Arabic',

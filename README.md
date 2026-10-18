@@ -21,7 +21,7 @@ A bilingual customer-management proof of concept for Shaghaf co-working-space re
 - Small screens show one customer card per row, medium screens show two top-aligned cards, and large screens use the full table.
 - Cards keep name, phone, and actions visible while additional details are collapsed. Each card has its own disclosure control; a page-level Show all / Hide all control is available on card layouts.
 - Buttons use consistent Shaghaf yellow or cream hover states. Clear, edit, and delete icons have concise tooltips on desktop pointer/keyboard focus; touch layouts do not depend on tooltips.
-- A bilingual footer contains the project disclaimer and a non-clickable GitHub link placeholder. It will become a real repository link after the repository is created; there is no hosted-demo link yet.
+- A bilingual footer contains the project disclaimer and a link to the GitHub repository; there is no hosted-demo link yet.
 
 ## UX and UI decisions
 
@@ -163,3 +163,7 @@ The interface targets modern evergreen browsers supported by Tailwind CSS v4. It
 **العربية (مصري)**
 
 > ده مشروع تجريبي معمول بـ React و ASP.NET بداتا وهمية ومبني على فكرة وموديل شغل 'شغف'. دي مش صفحة رسمية لإدارة العملاء (لأن ده أكيد هيحتاج نظام تسجيل دخول وتأمين وربط بـ APIs تانية) لكن ده مجرد تطبيق عملي بيوضّح طريقتي في تنظيم الـ Frontend وتقسيم وكتابة الـ Backend.
+
+## Repository
+
+The footer links to [hzmsalah/DemoTask](https://github.com/hzmsalah/DemoTask). No hosted demo is linked yet.

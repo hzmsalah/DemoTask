@@ -168,7 +168,7 @@ export function CustomerPage() {
           <div className="flex flex-col gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-start">
             <h2 className="text-sm font-semibold text-primary">{t('footerTitle')}</h2>
             <div className="flex flex-col gap-2 text-sm text-text-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
-              <p><span className="font-semibold text-text-main">{t('githubRepository')}:</span>{' '}<span>{t('githubPlaceholder')}</span></p>
+              <p><span className="font-semibold text-text-main">{t('githubRepository')}:</span>{' '}<a href="https://github.com/hzmsalah/DemoTask" className="font-semibold text-primary underline decoration-brand-accent underline-offset-4 transition-colors hover:text-primary-hover">hzmsalah/DemoTask</a></p>
             </div>
           </div>
           <p className="mt-4 text-start text-sm leading-relaxed text-text-muted">{t('footerDisclaimer')}</p>
