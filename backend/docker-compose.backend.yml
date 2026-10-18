@@ -1,0 +1,18 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-YourStrong@Password123}
+    ports:
+      - "${MSSQL_PORT:-1433}:1433"
+  backend:
+    build:
+      context: ./WorkspaceApi
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ConnectionStrings__DefaultConnection: Server=sqlserver,1433;Database=${MSSQL_DB_NAME:-ShaghafDb};User Id=sa;Password=${MSSQL_SA_PASSWORD:-YourStrong@Password123};TrustServerCertificate=True;
+    ports:
+      - "${API_PORT:-5000}:8080"
+    depends_on:
+      - sqlserver

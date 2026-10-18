@@ -1,0 +1,10 @@
+[
+  "fullName.required",
+  "fullName.length",
+  "phoneNumber.required",
+  "phoneNumber.invalid",
+  "phoneNumber.duplicate",
+  "email.invalid",
+  "email.tooLong",
+  "address.tooLong"
+]

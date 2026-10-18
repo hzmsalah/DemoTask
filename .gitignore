@@ -1,0 +1,18 @@
+.env
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+**/coverage/
+**/TestResults/
+.vs/
+*.user
+*.suo
+.work/
+
+# Private task context and local agent traces; do not publish with the project.
+/constitution.md
+/task-description.txt
+/task-requirements.txt
+**/.manus/
+**/[Aa][Gg][Ee][Nn][Tt][Ss].md
