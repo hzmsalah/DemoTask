@@ -9,8 +9,6 @@
 *.user
 *.suo
 .work/
-
-# Private task context and local agent traces; do not publish with the project.
 /constitution.md
 /task-description.txt
 /task-requirements.txt
