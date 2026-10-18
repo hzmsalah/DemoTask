@@ -30,9 +30,7 @@ services:
       - sqlserver-data:/var/opt/mssql/data
 
   backend:
-    build:
-      context: ./backend/WorkspaceApi
-      dockerfile: Dockerfile
+    image: ghcr.io/hzmsalah/demotask-api:latest
     container_name: shaghaf-api
     restart: on-failure
     environment:
@@ -49,9 +47,7 @@ services:
       - shaghaf-network
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: ghcr.io/hzmsalah/demotask-frontend:latest
     container_name: shaghaf-ui
     ports:
       - "${UI_PORT:-3000}:80"

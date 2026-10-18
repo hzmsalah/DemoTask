@@ -37,7 +37,7 @@ A bilingual customer-management proof of concept for Shaghaf co-working-space re
 - **Frontend:** React 19, TypeScript (strict), Vite 8, Tailwind CSS v4, Vitest, and React Testing Library.
 - **Backend:** ASP.NET Core on .NET 10, EF Core 10, SQL Server 2025, and xUnit.
 - **Phone numbers:** Google libphonenumber metadata on both sides of the API boundary; frontend and backend normalize and validate numbers independently, with the API authoritative.
-- **Deployment:** Docker Compose runs SQL Server, the API, and an nginx-served frontend. nginx proxies `/api` to the API service, so the browser uses a same-origin API path in the Docker deployment.
+- **Deployment:** Docker Compose pulls prebuilt API/frontend images from GitHub Container Registry (GHCR) and runs them with SQL Server. GitHub Actions builds and publishes the app images after repository pushes. A separate Compose override retains source builds for development. nginx proxies `/api` to the API service, so the browser uses a same-origin API path.
 - **Shared test contracts:** `shared/phone-vectors.json` and `shared/validation-codes.json` keep phone-number and validation-code expectations aligned across frontend and backend tests.
 
 ```text
@@ -45,18 +45,29 @@ backend/WorkspaceApi/        ASP.NET Core API and EF Core migrations
 backend/WorkspaceApi.Tests/  xUnit tests, including SQL Server integration tests
 frontend/                    React application, translations, and Vitest tests
 shared/                      Cross-stack phone and validation test vectors
-docker-compose.yml           Local multi-service environment
+docker-compose.yml           Multi-service stack using published app images
+docker-compose.build.yml     Optional local source-build override
+.github/workflows/            GHCR image-publishing workflow
 .env.example                 Safe environment-variable template
 ```
 
 ## Run the full stack with Docker
 
-Requirements: Docker Desktop (or another Docker Engine) with Linux containers enabled. From the repository root, copy the environment template, edit the SQL Server password to a strong local value, then start the services:
+Requirements: Docker Desktop (or another Docker Engine) with Linux containers enabled. From the repository root, copy the environment template and replace the sample SQL Server password with a strong local value. The easiest path uses prebuilt app images:
 
 ```powershell
 if (-not (Test-Path .env)) { Copy-Item .env.example .env }
-# Edit .env and replace the sample MSSQL_SA_PASSWORD before starting.
-docker compose up --build
+# Edit .env and replace MSSQL_SA_PASSWORD before starting.
+docker compose pull
+docker compose up -d
+```
+
+The prebuilt path avoids restoring NuGet packages or building the React app on your computer. It is available after the GitHub Actions image-publishing workflow has completed and the GHCR packages are public (or you have authenticated access to them). New GHCR packages are private by default. After the first successful run, open each package under your GitHub profile’s **Packages** tab, then use **Package settings → Change visibility → Public** to allow anonymous pulls. GitHub warns that public visibility cannot later be changed back to private, so make that choice yourself. The workflow uses the built-in `GITHUB_TOKEN` and needs no personal access token. The SQL Server image is still pulled from Microsoft's container registry.
+
+To build the application images from source instead, use the local build override (this requires local access to NuGet and npm registries):
+
+```powershell
+docker compose -f docker-compose.yml -f docker-compose.build.yml up --build
 ```
 
 Default endpoints:
@@ -67,7 +78,7 @@ Default endpoints:
 | API | <http://localhost:5000> |
 | SQL Server | `localhost:1433` |
 
-Ports and the database name can be changed in `.env`. The frontend uses nginx to proxy `/api` to the backend container. The SQL Server named volume persists across restarts. Stop the stack with `docker compose down`; **`docker compose down -v` deletes the database volume and its local data.** The `.env` file is ignored by Git and must not contain credentials that are committed or shared.
+Ports and the database name can be changed in `.env`. The frontend uses nginx to proxy `/api` to the backend container. The SQL Server named volume persists across restarts. To update downloaded images, run `docker compose pull` and then `docker compose up -d`. Stop the stack with `docker compose down`; **`docker compose down -v` deletes the database volume and its local data.** The `.env` file is ignored by Git and must not contain credentials that are committed or shared.
 
 ## Local development
 

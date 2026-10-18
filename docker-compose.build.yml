@@ -1,0 +1,12 @@
+services:
+  backend:
+    image: shaghaf-api:local
+    build:
+      context: ./backend/WorkspaceApi
+      dockerfile: Dockerfile
+
+  frontend:
+    image: shaghaf-ui:local
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
